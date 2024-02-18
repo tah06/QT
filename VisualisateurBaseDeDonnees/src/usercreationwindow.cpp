@@ -55,7 +55,9 @@ void UserCreationWindow::createUser() {
     }
 
     // Appeler la méthode addUser avec les informations fournies par l'utilisateur et le profil par défaut
-    if (manager.addUser(prenom, nom, motDepasse, "User")) {
+    QStringList profiles;
+    profiles << "User";
+    if (manager.addUser(prenom, nom, motDepasse, profiles)) {
         qDebug() << "Utilisateur créé avec succès.";
         accept(); // Fermer la fenêtre de création d'utilisateur si la création est réussie
     } else {

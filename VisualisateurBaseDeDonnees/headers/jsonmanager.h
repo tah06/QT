@@ -15,7 +15,7 @@ public:
 
     // Fonctions pour charger, ajouter, supprimer et modifier les utilisateurs
     bool loadUsers();
-    bool addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QString &profile);
+    bool addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles); // Modification du paramètre profile en QStringList
     bool removeUser(const QString &prenom, const QString &nom);
     bool updateUsermotDepasse(const QString &prenom, const QString &nom, const QString &newmotDepasse);
 

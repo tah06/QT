@@ -3,54 +3,19 @@
         "motDepasse": "Mohamed",
         "nom": "SID BRAHIM",
         "prenom": "SID BRAHIM",
-        "profile": "SuperUser"
+        "profile": ["SuperUser","Admin","User"]
     },
     {
         "motDepasse": "PASSWORD",
         "nom": "DIDI",
         "prenom": "Tah",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "ahmed123",
-        "nom": "Ahmed",
-        "prenom": "ahmed",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "password",
-        "nom": "EL VILALY",
-        "prenom": "elmeky",
-        "profile": "User"
+        "profile":["Admin", "User"]
     },
     {
         "motDepasse": "motdepasse",
-        "nom": "ABDEL HAMID",
-        "prenom": "Ousame",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "password",
-        "nom": "SID BRAHIM",
-        "prenom": "Tah",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "password",
-        "nom": "AMADOU",
-        "prenom": "Amadou",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "mohamed",
-        "nom": "DIDI",
-        "prenom": "Tah",
-        "profile": "User"
-    },
-    {
-        "motDepasse": "password",
-        "nom": "amadou",
-        "prenom": "amadou",
-        "profile": "User"
+        "nom": "Ahmed",
+        "prenom": "ahmed",
+        "profile":["User"]
     }
+    
 ]

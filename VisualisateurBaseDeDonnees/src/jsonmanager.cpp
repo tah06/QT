@@ -13,7 +13,7 @@ bool JSONManager::loadUsers() {
     }
 }
 
-bool JSONManager::addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QString &profile) {
+bool JSONManager::addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles) {
     // Charger d'abord les utilisateurs existants
     if (!loadFromFile()) {
         qDebug() << "Erreur lors du chargement des utilisateurs.";
@@ -25,7 +25,7 @@ bool JSONManager::addUser(const QString &prenom, const QString &nom, const QStri
     userObject["nom"] = nom;
     userObject["prenom"] = prenom;
     userObject["motDepasse"] = motDepasse;
-    userObject["profile"] = profile;
+    userObject["profile"] = QJsonArray::fromStringList(profiles); // Convertir la liste de profils en un tableau JSON
 
     // Ajouter le nouvel utilisateur à la fin de la liste
     m_usersArray.append(userObject);
@@ -39,19 +39,6 @@ bool JSONManager::addUser(const QString &prenom, const QString &nom, const QStri
         qDebug() << "Erreur lors de l'ajout de l'utilisateur.";
         return false;
     }
-}
-
-
-
-bool JSONManager::removeUser(const QString &prenom, const QString &nom) {
-    for (int i = 0; i < m_usersArray.size(); ++i) {
-        QJsonObject userObject = m_usersArray.at(i).toObject();
-        if (userObject["prenom"].toString() == prenom && userObject["nom"].toString() == nom) {
-            m_usersArray.removeAt(i);
-            return saveToFile();
-        }
-    }
-    return false; // L'utilisateur n'a pas été trouvé
 }
 
 bool JSONManager::updateUsermotDepasse(const QString &prenom, const QString &nom, const QString &newmotDepasse) {
@@ -95,3 +82,4 @@ bool JSONManager::loadFromFile() {
     file.close();
     return true;
 }
+
