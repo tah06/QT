@@ -62,29 +62,36 @@ void MainWindow::showMainPage() {
     mainWidget = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
 
-    // Créer le QLabel avec le texte incluant le profil de l'utilisateur
-    QLabel *titleLabel = new QLabel("Page principale - Profil : " + username);
-    layout->addWidget(titleLabel);
+    // Vérifier si le premier profil de l'utilisateur est "User"
+    if (!profiles.isEmpty() && profiles.first() == "User") {
+        // Afficher uniquement le message de bienvenue pour les utilisateurs "User"
+        QLabel *welcomeLabel = new QLabel("Bienvenue sur la page principale");
+        layout->addWidget(welcomeLabel);
+    } else {
+        // Créer le QLabel avec le texte incluant le profil de l'utilisateur
+        QLabel *titleLabel = new QLabel("Page principale - Profil : " + username);
+        layout->addWidget(titleLabel);
 
-    // Créer le tableau des utilisateurs
-    userTable = new QTableWidget(this);
-    userTable->setColumnCount(2); // Définir le nombre de colonnes
-    userTable->setHorizontalHeaderLabels({"Nom", "Prénom"}); // Ajouter les en-têtes de colonne
-    layout->addWidget(userTable);
+        // Créer le tableau des utilisateurs
+        userTable = new QTableWidget(this);
+        userTable->setColumnCount(2); // Définir le nombre de colonnes
+        userTable->setHorizontalHeaderLabels({"Nom", "Prénom"}); // Ajouter les en-têtes de colonne
+        layout->addWidget(userTable);
 
-    // Créer le QComboBox pour les profils
-    QComboBox *profileComboBox = new QComboBox(this);
-    profileComboBox->addItems(profiles);
-    layout->addWidget(profileComboBox);
+        // Créer le QComboBox pour les profils
+        QComboBox *profileComboBox = new QComboBox(this);
+        profileComboBox->addItems(profiles);
+        layout->addWidget(profileComboBox);
 
-    // Connecter le signal de changement de profil au slot correspondant
-    connect(profileComboBox, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
-            this, &MainWindow::profileChanged);
+        // Connecter le signal de changement de profil au slot correspondant
+        connect(profileComboBox, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+                this, &MainWindow::profileChanged);
 
-    // Sélectionner par défaut le premier profil de la liste
-    if (!profiles.isEmpty()) {
-        profileComboBox->setCurrentIndex(0);
-        profileChanged(profiles.first());
+        // Sélectionner par défaut le premier profil de la liste
+        if (!profiles.isEmpty()) {
+            profileComboBox->setCurrentIndex(0);
+            profileChanged(profiles.first());
+        }
     }
 
     // Créer le bouton de déconnexion
@@ -105,6 +112,8 @@ void MainWindow::showMainPage() {
     // Appeler la méthode pour configurer le dropdown avec le bon nom d'utilisateur
     setupProfileDropdown();
 }
+
+
 
 
 
