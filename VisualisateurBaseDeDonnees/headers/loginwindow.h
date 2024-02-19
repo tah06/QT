@@ -13,6 +13,7 @@ class LoginWindow : public QMainWindow
 public:
     LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
+    QString getUsername() const;
 
 signals:
     void loginSuccessful();

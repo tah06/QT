@@ -3,11 +3,13 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/jsonmanager.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/loginwindow.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/mainwindow.h \
+	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/profiledropdown.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/usercreationwindow.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/jsonmanager.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/loginwindow.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/main.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/mainwindow.cpp \
+	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/profiledropdown.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/usercreationwindow.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/build-VisualisateurBaseDeDonnees-Desktop_Qt_6_6_1_GCC_64bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/build-VisualisateurBaseDeDonnees-Desktop_Qt_6_6_1_GCC_64bit-Debug/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake \
@@ -19,10 +21,12 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/QJsonDocument \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/QJsonObject \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/QObject \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/QSettings \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/q20functional.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/q20memory.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/q20type_traits.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/q23utility.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qabstractitemmodel.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qalgorithms.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qanystringview.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qarraydata.h \
@@ -70,6 +74,7 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qhashfunctions.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qiodevice.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qiodevicebase.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qitemselectionmodel.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qiterable.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qiterator.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qjsonarray.h \
@@ -104,6 +109,7 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qscopedpointer.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qscopeguard.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qset.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qsettings.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qshareddata.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qshareddata_impl.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtCore/qsharedpointer.h \
@@ -162,6 +168,7 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpaintdevice.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpalette.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpen.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpicture.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpixelformat.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpixmap.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qpolygon.h \
@@ -176,18 +183,44 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qtguiexports.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qtguiglobal.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qtransform.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qvalidator.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtGui/qwindowdefs.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QComboBox \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QDialog \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QLabel \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QLineEdit \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QMainWindow \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QMessageBox \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QPushButton \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QTableWidget \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QVBoxLayout \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QWidget \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractslider.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qboxlayout.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qcombobox.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qdialog.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qframe.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qgridlayout.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qlabel.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qlayout.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qlayoutitem.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qlineedit.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qmainwindow.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qmessagebox.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qpushbutton.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qrubberband.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qslider.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qstyle.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qstyleoption.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtabbar.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtableview.h \
+	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtablewidget.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtabwidget.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qtwidgetsexports.h \

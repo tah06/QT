@@ -3,19 +3,51 @@
         "motDepasse": "Mohamed",
         "nom": "SID BRAHIM",
         "prenom": "SID BRAHIM",
-        "profile": ["SuperUser","Admin","User"]
+        "profile": [
+            "SuperUser",
+            "Admin",
+            "User"
+        ]
     },
     {
         "motDepasse": "PASSWORD",
         "nom": "DIDI",
         "prenom": "Tah",
-        "profile":["Admin", "User"]
+        "profile": [
+            "Admin",
+            "User"
+        ]
     },
     {
         "motDepasse": "motdepasse",
         "nom": "Ahmed",
         "prenom": "ahmed",
-        "profile":["User"]
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "MOHAMED",
+        "nom": "ALI",
+        "prenom": "Ali",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "test",
+        "nom": "TEST",
+        "prenom": "Test",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "test",
+        "nom": "test",
+        "prenom": "test",
+        "profile": [
+            "User"
+        ]
     }
-    
 ]

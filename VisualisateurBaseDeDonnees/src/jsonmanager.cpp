@@ -1,56 +1,108 @@
+// jsonmanager.cpp
 #include "jsonmanager.h"
 
 JSONManager::JSONManager(QObject *parent)
     : QObject(parent), m_filePath("../VisualisateurBaseDeDonnees/users.json") {}
 
 bool JSONManager::loadUsers() {
-    if (loadFromFile()) {
-        qDebug() << "Utilisateurs chargés avec succès.";
-        return true;
-    } else {
-        qDebug() << "Erreur lors du chargement des utilisateurs.";
-        return false;
-    }
+    return loadFromFile();
 }
 
 bool JSONManager::addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles) {
-    // Charger d'abord les utilisateurs existants
     if (!loadFromFile()) {
         qDebug() << "Erreur lors du chargement des utilisateurs.";
         return false;
     }
 
-    // Créer un objet JSON pour le nouvel utilisateur
-    QJsonObject userObject;
-    userObject["nom"] = nom;
-    userObject["prenom"] = prenom;
-    userObject["motDepasse"] = motDepasse;
-    userObject["profile"] = QJsonArray::fromStringList(profiles); // Convertir la liste de profils en un tableau JSON
+    QJsonObject newUser;
+    newUser["prenom"] = prenom;
+    newUser["nom"] = nom;
+    newUser["motDepasse"] = motDepasse;
+    newUser["profile"] = QJsonArray::fromStringList(profiles);
 
-    // Ajouter le nouvel utilisateur à la fin de la liste
-    m_usersArray.append(userObject);
+    m_usersArray.append(newUser);
 
-    // Sauvegarder le fichier avec le nouvel utilisateur ajouté
-    if (saveToFile()) {
-        qDebug() << "Utilisateur ajouté avec succès.";
-
-        return true;
-    } else {
-        qDebug() << "Erreur lors de l'ajout de l'utilisateur.";
-        return false;
-    }
+    return saveToFile();
 }
 
-bool JSONManager::updateUsermotDepasse(const QString &prenom, const QString &nom, const QString &newmotDepasse) {
+bool JSONManager::removeUser(const QString &prenom, const QString &nom) {
+    if (!loadFromFile()) {
+        qDebug() << "Erreur lors du chargement des utilisateurs.";
+        return false;
+    }
+
     for (int i = 0; i < m_usersArray.size(); ++i) {
-        QJsonObject userObject = m_usersArray.at(i).toObject();
-        if (userObject["prenom"].toString() == prenom && userObject["nom"].toString() == nom) {
-            userObject["motDepasse"] = newmotDepasse;
-            m_usersArray[i] = userObject;
+        QJsonObject user = m_usersArray.at(i).toObject();
+        if (user["prenom"].toString() == prenom && user["nom"].toString() == nom) {
+            m_usersArray.removeAt(i);
             return saveToFile();
         }
     }
-    return false; // L'utilisateur n'a pas été trouvé
+
+    qDebug() << "Utilisateur non trouvé.";
+    return false;
+}
+
+bool JSONManager::updateUser(const QString &prenom, const QString &nom, const QString &newmotDepasse, const QStringList &newProfiles) {
+    if (!loadFromFile()) {
+        qDebug() << "Erreur lors du chargement des utilisateurs.";
+        return false;
+    }
+
+    for (int i = 0; i < m_usersArray.size(); ++i) {
+        QJsonObject user = m_usersArray.at(i).toObject();
+        if (user["prenom"].toString() == prenom && user["nom"].toString() == nom) {
+            user["motDepasse"] = newmotDepasse;
+            user["profile"] = QJsonArray::fromStringList(newProfiles);
+            m_usersArray[i] = user;
+            return saveToFile();
+        }
+    }
+
+    qDebug() << "Utilisateur non trouvé.";
+    return false;
+}
+
+QStringList JSONManager::getUserProfiles(const QString &username) const {
+    QStringList profiles;
+
+    // Ouvrir le fichier JSON contenant les utilisateurs et leurs profils
+    QFile file(m_filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Erreur: Impossible d'ouvrir le fichier JSON";
+        return profiles;
+    }
+
+    // Lire le contenu du fichier JSON
+    QByteArray jsonData = file.readAll();
+    file.close();
+
+    // Analyser le contenu JSON
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+    if (!jsonDoc.isArray()) {
+        qDebug() << "Erreur: Format de fichier JSON invalide";
+        return profiles;
+    }
+
+    // Parcourir le tableau JSON pour trouver l'utilisateur
+    QJsonArray jsonArray = jsonDoc.array();
+    for (const QJsonValue &value : jsonArray) {
+        QJsonObject userObject = value.toObject();
+        QString storedUsername = userObject.value("nom").toString(); // Nom de l'utilisateur
+
+        if (storedUsername == username) {
+            // L'utilisateur est trouvé, récupérer ses profils
+            QJsonArray profilesArray = userObject.value("profile").toArray();
+            for (const QJsonValue &profileValue : profilesArray) {
+                profiles.append(profileValue.toString());
+            }
+            return profiles; // Retourner les profils de l'utilisateur trouvé
+        }
+    }
+
+    // Si l'utilisateur n'est pas trouvé dans le fichier JSON
+    qDebug() << "L'utilisateur" << username << "n'existe pas";
+    return profiles;
 }
 
 bool JSONManager::saveToFile() {
@@ -81,5 +133,49 @@ bool JSONManager::loadFromFile() {
     m_usersArray = jsonDoc.array();
     file.close();
     return true;
+}
+
+QList<QPair<QString, QString>> JSONManager::getAllUsers(const QString &profile) const {
+    QList<QPair<QString, QString>> users;
+
+    // Ouvrir le fichier JSON contenant les utilisateurs
+    QFile file(m_filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Erreur: Impossible d'ouvrir le fichier JSON";
+        return users;
+    }
+
+    // Lire le contenu du fichier JSON
+    QByteArray jsonData = file.readAll();
+    file.close();
+
+    // Analyser le contenu JSON
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+    if (!jsonDoc.isArray()) {
+        qDebug() << "Erreur: Format de fichier JSON invalide";
+        return users;
+    }
+
+    // Parcourir le tableau JSON pour trouver les utilisateurs
+    QJsonArray jsonArray = jsonDoc.array();
+    for (const QJsonValue &value : jsonArray) {
+        QJsonObject userObject = value.toObject();
+        QJsonArray userProfiles = userObject.value("profile").toArray();
+
+        // Afficher les profils de l'utilisateur pour débogage
+        qDebug() << "Profils de l'utilisateur:" << userProfiles;
+
+        // Vérifier si l'utilisateur a le profil requis
+        if (profile == "SuperUser" || (profile == "Admin" && userProfiles.contains("Admin"))) {
+            QString nom = userObject.value("nom").toString();
+            QString prenom = userObject.value("prenom").toString();
+            users.append(qMakePair(nom, prenom));
+        }
+    }
+
+    // Afficher les utilisateurs récupérés pour débogage
+    qDebug() << "Utilisateurs récupérés pour le profil" << profile << ":" << users;
+
+    return users;
 }
 

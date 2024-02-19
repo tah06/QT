@@ -409,6 +409,12 @@
 			null
 		],
 		[
+			"/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/profiledropdown.h",
+			"MU",
+			"K6S233IZAZ/moc_profiledropdown.cpp",
+			null
+		],
+		[
 			"/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/usercreationwindow.h",
 			"MU",
 			"K6S233IZAZ/moc_usercreationwindow.cpp",
@@ -492,6 +498,11 @@
 		],
 		[
 			"/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/profiledropdown.cpp",
 			"MU",
 			null
 		],

@@ -9,7 +9,6 @@
 #include <QFile>
 #include <QMessageBox>
 
-
 LoginWindow::LoginWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -80,4 +79,8 @@ bool LoginWindow::loginUser() {
     qDebug() << "L'utilisateur" << username << "n'existe pas ou le mot de passe est incorrect";
     QMessageBox::critical(this, "Erreur", "Nom d'utilisateur ou mot de passe incorrect !");
     return false;
+}
+
+QString LoginWindow::getUsername() const {
+    return usernameLineEdit->text();
 }

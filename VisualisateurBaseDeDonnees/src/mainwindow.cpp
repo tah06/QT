@@ -1,104 +1,192 @@
 #include "mainwindow.h"
+#include "jsonmanager.h"
 #include "usercreationwindow.h"
+#include "loginwindow.h"
+
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QDebug>
 #include <QSettings>
 #include <QMessageBox>
 #include <QMenuBar>
+#include <QPushButton>
+#include <QOverload>
+
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), loginWindow(nullptr)
+    : QMainWindow(parent), loginWindow(nullptr), mainWidget(nullptr), disconnectButton(nullptr), jsonManager(nullptr), userTable(nullptr)
 {
     setWindowTitle("Main Window");
 
-
-
+    jsonManager = new JSONManager(this);
 
     // Vérifier si c'est la première fois que l'utilisateur ouvre l'application
     QSettings settings("MonEntreprise", "MonApplication");
     bool isFirstRun = settings.value("firstRun", true).toBool();
-    //settings.setValue("firstRun", true);
-
+    settings.setValue("firstRun", false);
     if (isFirstRun) {
         // Afficher la fenêtre de création d'utilisateur
-        UserCreationWindow userCreationWindow;
-        if (userCreationWindow.exec() == QDialog::Accepted) {
-            qDebug() << "Création d'utilisateur réussie";
-            // Mettre à jour les paramètres pour indiquer que l'application a déjà été ouverte une fois
-            settings.setValue("firstRun", false);
-        } else {
-            qDebug() << "Création d'utilisateur annulée";
-        }
+        settings.setValue("firstRun", false);
+        showUserCreationWindow();
     } else {
         // Afficher la fenêtre de connexion
-
         showLoginWindow();
-
     }
 }
 
 MainWindow::~MainWindow()
 {
-    if (loginWindow) {
-        delete loginWindow;
-    }
+    delete loginWindow;
+    delete mainWidget;
+    delete jsonManager;
 }
-
 
 void MainWindow::showLoginWindow() {
     // Afficher la fenêtre de connexion
     loginWindow = new LoginWindow();
     connect(loginWindow, &LoginWindow::loginSuccessful, this, &MainWindow::showMainPage);
-   // connect(loginWindow, &QObject::finished, this, &MainWindow::hideDisconnectButton);     // Connectez le signal finished de la fenêtre de connexion
+
     setCentralWidget(loginWindow);
     loginWindow->show();
-    // disconnectButton->hide();
-    //hideDisconnectButton();
 }
-
-void MainWindow::hideDisconnectButton() {
-    // Cacher le bouton de déconnexion
-    //if (disconnectButton)
-        disconnectButton->hide();
-}
-
-
 
 void MainWindow::showMainPage() {
-
-    // delete loginWindow;
-    // loginWindow = nullptr;
-
     qDebug() << "Connexion réussie, affichage de la page principale...";
 
+    // Récupérer l'utilisateur actuellement connecté
+    username = loginWindow->getUsername(); // Assurez-vous que username est un membre de la classe MainWindow
+    QStringList profiles = jsonManager->getUserProfiles(username);
+    qDebug() << "Profils de l'utilisateur:" << profiles;
 
-    // Créer et afficher la fenêtre de la page principale
-    QWidget *mainPage = new QWidget;
-    QVBoxLayout *layout = new QVBoxLayout(mainPage);
-    QLabel *titleLabel = new QLabel("Bienvenue sur la page principale !");
+    // Créer le widget principal avec son contenu
+    mainWidget = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout(mainWidget);
+
+    // Créer le QLabel avec le texte incluant le profil de l'utilisateur
+    QLabel *titleLabel = new QLabel("Page principale - Profil : " + username);
     layout->addWidget(titleLabel);
 
-    // Ajouter d'autres éléments à la page principale si nécessaire
+    // Créer le tableau des utilisateurs
+    userTable = new QTableWidget(this);
+    userTable->setColumnCount(2); // Définir le nombre de colonnes
+    userTable->setHorizontalHeaderLabels({"Nom", "Prénom"}); // Ajouter les en-têtes de colonne
+    layout->addWidget(userTable);
+
+    // Créer le QComboBox pour les profils
+    QComboBox *profileComboBox = new QComboBox(this);
+    profileComboBox->addItems(profiles);
+    layout->addWidget(profileComboBox);
+
+    // Connecter le signal de changement de profil au slot correspondant
+    connect(profileComboBox, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+            this, &MainWindow::profileChanged);
+
+    // Sélectionner par défaut le premier profil de la liste
+    if (!profiles.isEmpty()) {
+        profileComboBox->setCurrentIndex(0);
+        profileChanged(profiles.first());
+    }
+
     // Créer le bouton de déconnexion
     disconnectButton = new QPushButton("Déconnexion", this);
     connect(disconnectButton, &QPushButton::clicked, this, &MainWindow::disconnectUser);
-    disconnectButton->show();
+
     // Afficher le bouton de déconnexion dans la barre de menus
     menuBar()->addSeparator();
     menuBar()->setCornerWidget(disconnectButton, Qt::TopRightCorner);
 
-    mainPage->setLayout(layout);
-    setCentralWidget(mainPage);
+    disconnectButton->show();
+    mainWidget->setLayout(layout);
+    setCentralWidget(mainWidget);
 
+    // Vérifier le layout principal
+    qDebug() << "Main layout: " << layout->count() << " items";
+
+    // Appeler la méthode pour configurer le dropdown avec le bon nom d'utilisateur
+    setupProfileDropdown();
 }
 
-// Définissez la fonction de déconnexion
+
+
+void MainWindow::profileChanged(const QString &newProfile) {
+    // Mettre à jour le profil de l'utilisateur ici
+    qDebug() << "Profil changé : " << newProfile;
+
+    // Charger la liste des utilisateurs en fonction du profil sélectionné
+    QList<QPair<QString, QString>> users = jsonManager->getAllUsers(newProfile);
+
+    // Effacer le contenu du tableau des utilisateurs
+    userTable->clearContents();
+    userTable->setRowCount(0);
+
+    // Remplir le tableau avec les utilisateurs
+    int row = 0;
+    for (const auto &user : users) {
+        userTable->insertRow(row);
+        userTable->setItem(row, 0, new QTableWidgetItem(user.first)); // Nom
+        userTable->setItem(row, 1, new QTableWidgetItem(user.second)); // Prénom
+        ++row;
+    }
+
+    // Mettre à jour le titre de la fenêtre avec le nouveau profil
+    setWindowTitle("Main Window - Profile: " + newProfile);
+}
+
+
+
 void MainWindow::disconnectUser() {
     // Afficher un message de déconnexion réussie
-    QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
     disconnectButton->hide();
+    QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
 
     // Afficher la fenêtre de connexion
     showLoginWindow();
+}
+
+void MainWindow::showUserCreationWindow() {
+    // Afficher la fenêtre de création d'utilisateur
+    UserCreationWindow userCreationWindow;
+    if (userCreationWindow.exec() == QDialog::Accepted) {
+        qDebug() << "Création d'utilisateur réussie";
+        // Mettre à jour les paramètres pour indiquer que l'application a déjà été ouverte une fois
+        QSettings settings("MonEntreprise", "MonApplication");
+        settings.setValue("firstRun", false);
+        // Afficher la fenêtre de connexion
+        showLoginWindow();
+    } else {
+        qDebug() << "Création d'utilisateur annulée";
+        // Fermer l'application si la création d'utilisateur est annulée
+        close();
+    }
+}
+
+void MainWindow::setupProfileDropdown() {
+    profileDropdown = new ProfileDropdown(this);
+    QStringList profiles = jsonManager->getUserProfiles(username); // Assurez-vous d'avoir un moyen d'accéder au nom de l'utilisateur courant
+    profileDropdown->setProfiles(profiles);
+    connect(profileDropdown, &ProfileDropdown::profileChanged, this, &MainWindow::handleProfileDropdownChange);
+}
+
+void MainWindow::handleProfileDropdownChange(const QString &newProfile) {
+    // Mettez ici le code pour gérer le changement de profil
+    qDebug() << "Profil changé : " << newProfile;
+
+    // Charger la liste des utilisateurs en fonction du profil sélectionné
+    QList<QPair<QString, QString>> users = jsonManager->getAllUsers(newProfile);
+
+    // Effacer le contenu du tableau des utilisateurs
+    userTable->clearContents();
+    userTable->setRowCount(0);
+
+    // Remplir le tableau avec les utilisateurs
+    int row = 0;
+    for (const auto &user : users) {
+        userTable->insertRow(row);
+        userTable->setItem(row, 0, new QTableWidgetItem(user.first)); // Nom
+        userTable->setItem(row, 1, new QTableWidgetItem(user.second)); // Prénom
+        ++row;
+    }
+
+    // Mettre à jour le titre de la fenêtre avec le nouveau profil
+    setWindowTitle("Main Window - Profile: " + newProfile);
 }

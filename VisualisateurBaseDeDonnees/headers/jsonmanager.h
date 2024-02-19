@@ -1,3 +1,4 @@
+// jsonmanager.h
 #ifndef JSONMANAGER_H
 #define JSONMANAGER_H
 
@@ -15,15 +16,17 @@ public:
 
     // Fonctions pour charger, ajouter, supprimer et modifier les utilisateurs
     bool loadUsers();
-    bool addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles); // Modification du paramètre profile en QStringList
+    bool addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles);
     bool removeUser(const QString &prenom, const QString &nom);
-    bool updateUsermotDepasse(const QString &prenom, const QString &nom, const QString &newmotDepasse);
+    bool updateUser(const QString &prenom, const QString &nom, const QString &newmotDepasse, const QStringList &newProfiles);
+
+    QStringList getUserProfiles(const QString &username) const;
+    QList<QPair<QString, QString>> getAllUsers(const QString &profile) const;
 
 private:
-    QString m_filePath; // Chemin vers le fichier JSON
-    QJsonArray m_usersArray; // Tableau JSON contenant les utilisateurs
+    QString m_filePath;
+    QJsonArray m_usersArray;
 
-    // Fonctions privées pour la manipulation du fichier JSON
     bool saveToFile();
     bool loadFromFile();
 };

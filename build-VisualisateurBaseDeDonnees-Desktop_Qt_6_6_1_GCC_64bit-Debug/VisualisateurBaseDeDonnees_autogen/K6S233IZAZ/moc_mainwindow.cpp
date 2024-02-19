@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../VisualisateurBaseDeDonnees/headers/mainwindow.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)
@@ -42,18 +43,20 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "showMainPage",
     "",
     "disconnectUser",
-    "showLoginWindow",
-    "hideDisconnectButton"
+    "profileChanged",
+    "newProfile",
+    "newIndex"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[12];
+    uint offsetsAndSizes[14];
     char stringdata0[11];
     char stringdata1[13];
     char stringdata2[1];
     char stringdata3[15];
-    char stringdata4[16];
-    char stringdata5[21];
+    char stringdata4[15];
+    char stringdata5[11];
+    char stringdata6[9];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -63,15 +66,17 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(11, 12),  // "showMainPage"
         QT_MOC_LITERAL(24, 0),  // ""
         QT_MOC_LITERAL(25, 14),  // "disconnectUser"
-        QT_MOC_LITERAL(40, 15),  // "showLoginWindow"
-        QT_MOC_LITERAL(56, 20)   // "hideDisconnectButton"
+        QT_MOC_LITERAL(40, 14),  // "profileChanged"
+        QT_MOC_LITERAL(55, 10),  // "newProfile"
+        QT_MOC_LITERAL(66, 8)   // "newIndex"
     },
     "MainWindow",
     "showMainPage",
     "",
     "disconnectUser",
-    "showLoginWindow",
-    "hideDisconnectButton"
+    "profileChanged",
+    "newProfile",
+    "newIndex"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -91,16 +96,16 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x0a,    1 /* Public */,
-       3,    0,   39,    2, 0x0a,    2 /* Public */,
-       4,    0,   40,    2, 0x0a,    3 /* Public */,
-       5,    0,   41,    2, 0x0a,    4 /* Public */,
+       1,    0,   38,    2, 0x08,    1 /* Private */,
+       3,    0,   39,    2, 0x08,    2 /* Private */,
+       4,    1,   40,    2, 0x08,    3 /* Private */,
+       4,    1,   43,    2, 0x08,    5 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::Int,    6,
 
        0        // eod
 };
@@ -118,10 +123,12 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'disconnectUser'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'showLoginWindow'
+        // method 'profileChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'hideDisconnectButton'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'profileChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -134,12 +141,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->showMainPage(); break;
         case 1: _t->disconnectUser(); break;
-        case 2: _t->showLoginWindow(); break;
-        case 3: _t->hideDisconnectButton(); break;
+        case 2: _t->profileChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *MainWindow::metaObject() const

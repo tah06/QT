@@ -2,4 +2,5 @@
 #include "K6S233IZAZ/moc_jsonmanager.cpp"
 #include "K6S233IZAZ/moc_loginwindow.cpp"
 #include "K6S233IZAZ/moc_mainwindow.cpp"
+#include "K6S233IZAZ/moc_profiledropdown.cpp"
 #include "K6S233IZAZ/moc_usercreationwindow.cpp"

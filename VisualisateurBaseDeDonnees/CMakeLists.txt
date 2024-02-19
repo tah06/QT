@@ -43,6 +43,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/jsonmanager.cpp
         headers/loginwindow.h
         src/loginwindow.cpp
+        headers/profiledropdown.h
+        src/profiledropdown.cpp
     )
 else()
     if(ANDROID)
