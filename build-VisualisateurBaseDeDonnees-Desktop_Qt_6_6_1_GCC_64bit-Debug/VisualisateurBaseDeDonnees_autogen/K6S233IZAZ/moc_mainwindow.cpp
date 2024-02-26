@@ -45,18 +45,30 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "disconnectUser",
     "profileChanged",
     "newProfile",
-    "newIndex"
+    "handleProfileDropdownChange",
+    "handleDeleteButtonClicked",
+    "prenom",
+    "nom",
+    "handleUpdateButtonClicked",
+    "showUpdateUserDialog",
+    "addUserButtonClicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[14];
+    uint offsetsAndSizes[26];
     char stringdata0[11];
     char stringdata1[13];
     char stringdata2[1];
     char stringdata3[15];
     char stringdata4[15];
     char stringdata5[11];
-    char stringdata6[9];
+    char stringdata6[28];
+    char stringdata7[26];
+    char stringdata8[7];
+    char stringdata9[4];
+    char stringdata10[26];
+    char stringdata11[21];
+    char stringdata12[21];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -68,7 +80,13 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(25, 14),  // "disconnectUser"
         QT_MOC_LITERAL(40, 14),  // "profileChanged"
         QT_MOC_LITERAL(55, 10),  // "newProfile"
-        QT_MOC_LITERAL(66, 8)   // "newIndex"
+        QT_MOC_LITERAL(66, 27),  // "handleProfileDropdownChange"
+        QT_MOC_LITERAL(94, 25),  // "handleDeleteButtonClicked"
+        QT_MOC_LITERAL(120, 6),  // "prenom"
+        QT_MOC_LITERAL(127, 3),  // "nom"
+        QT_MOC_LITERAL(131, 25),  // "handleUpdateButtonClicked"
+        QT_MOC_LITERAL(157, 20),  // "showUpdateUserDialog"
+        QT_MOC_LITERAL(178, 20)   // "addUserButtonClicked"
     },
     "MainWindow",
     "showMainPage",
@@ -76,7 +94,13 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
     "disconnectUser",
     "profileChanged",
     "newProfile",
-    "newIndex"
+    "handleProfileDropdownChange",
+    "handleDeleteButtonClicked",
+    "prenom",
+    "nom",
+    "handleUpdateButtonClicked",
+    "showUpdateUserDialog",
+    "addUserButtonClicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -88,7 +112,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -96,16 +120,24 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x08,    1 /* Private */,
-       3,    0,   39,    2, 0x08,    2 /* Private */,
-       4,    1,   40,    2, 0x08,    3 /* Private */,
-       4,    1,   43,    2, 0x08,    5 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    1,   64,    2, 0x08,    3 /* Private */,
+       6,    1,   67,    2, 0x08,    5 /* Private */,
+       7,    2,   70,    2, 0x08,    7 /* Private */,
+      10,    2,   75,    2, 0x08,   10 /* Private */,
+      11,    2,   80,    2, 0x08,   13 /* Private */,
+      12,    0,   85,    2, 0x08,   16 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    5,
-    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    8,    9,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    8,    9,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,    9,    8,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -126,9 +158,23 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'profileChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
-        // method 'profileChanged'
+        // method 'handleProfileDropdownChange'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'handleDeleteButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'handleUpdateButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'showUpdateUserDialog'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'addUserButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -142,6 +188,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 0: _t->showMainPage(); break;
         case 1: _t->disconnectUser(); break;
         case 2: _t->profileChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->handleProfileDropdownChange((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->handleDeleteButtonClicked((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 5: _t->handleUpdateButtonClicked((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 6: _t->showUpdateUserDialog((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 7: _t->addUserButtonClicked(); break;
         default: ;
         }
     }
@@ -166,13 +217,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 8;
     }
     return _id;
 }

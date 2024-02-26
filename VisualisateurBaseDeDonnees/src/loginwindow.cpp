@@ -70,7 +70,7 @@ bool LoginWindow::loginUser() {
 
         if (storedUsername == username && storedPassword == password) {
             qDebug() << "Connexion réussie pour l'utilisateur:" << username;
-            emit loginSuccessful();
+            emit loginSuccessful(username);
             return true; // Utilisateur trouvé, connexion réussie
         }
     }

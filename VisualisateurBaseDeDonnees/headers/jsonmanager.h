@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QJsonDocument>
 
+
 class JSONManager : public QObject
 {
     Q_OBJECT
@@ -18,7 +19,8 @@ public:
     bool loadUsers();
     bool addUser(const QString &prenom, const QString &nom, const QString &motDepasse, const QStringList &profiles);
     bool removeUser(const QString &prenom, const QString &nom);
-    bool updateUser(const QString &prenom, const QString &nom, const QString &newmotDepasse, const QStringList &newProfiles);
+    bool updateUser(const QString &prenom, const QString &nom, const QString &newNom, const QString &newPrenom, const QString &newMotDePasse, const QStringList &newProfiles);
+
 
     QStringList getUserProfiles(const QString &username) const;
     QList<QPair<QString, QString>> getAllUsers(const QString &profile) const;
@@ -29,6 +31,11 @@ private:
 
     bool saveToFile();
     bool loadFromFile();
+
+
+
+
+
 };
 
 #endif // JSONMANAGER_H

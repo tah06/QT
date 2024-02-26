@@ -27,6 +27,14 @@ private slots:
     void disconnectUser();
     void profileChanged(const QString &newProfile);
     void handleProfileDropdownChange(const QString &newProfile);
+    void handleDeleteButtonClicked(const QString &prenom, const QString &nom);
+    void handleUpdateButtonClicked(const QString &prenom, const QString &nom);
+
+    void showUpdateUserDialog(const QString &nom, const QString &prenom);
+    void addUserButtonClicked();
+
+
+
 
 
 
@@ -44,6 +52,20 @@ private:
      QComboBox *profileComboBox;
      void setupProfileDropdown();
      QString username;
+     void clearLayout(QLayout *layout);
+     QPushButton *deleteButton;
+     QPushButton *editButton;
+
+     void updateUserSuccess(QDialog *dialog, const QString &nom, const QString &prenom, const QString &newNom, const QString &newPrenom);
+     void refreshUserTable();
+
+    QDialog dialog;
+
+    void setUsername(const QString &newUsername);
+    QPushButton *addUserButton;
+
+
+
 
 };
 

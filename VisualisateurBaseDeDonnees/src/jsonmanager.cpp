@@ -31,11 +31,21 @@ bool JSONManager::removeUser(const QString &prenom, const QString &nom) {
         return false;
     }
 
+    // Parcourir le tableau des utilisateurs
     for (int i = 0; i < m_usersArray.size(); ++i) {
         QJsonObject user = m_usersArray.at(i).toObject();
+        // Vérifier si les prénom et nom correspondent
         if (user["prenom"].toString() == prenom && user["nom"].toString() == nom) {
+            // Supprimer l'utilisateur du tableau
             m_usersArray.removeAt(i);
-            return saveToFile();
+            // Enregistrer les modifications dans le fichier
+            if (saveToFile()) {
+                qDebug() << "Utilisateur supprimé avec succès.";
+                return true;
+            } else {
+                qDebug() << "Erreur lors de la sauvegarde des modifications.";
+                return false;
+            }
         }
     }
 
@@ -43,25 +53,69 @@ bool JSONManager::removeUser(const QString &prenom, const QString &nom) {
     return false;
 }
 
-bool JSONManager::updateUser(const QString &prenom, const QString &nom, const QString &newmotDepasse, const QStringList &newProfiles) {
-    if (!loadFromFile()) {
-        qDebug() << "Erreur lors du chargement des utilisateurs.";
-        return false;
+
+bool JSONManager::updateUser(const QString &prenom, const QString &nom, const QString &newPrenom, const QString &newNom, const QString &newmotDepasse, const QStringList &newProfiles) {
+    // Ouvrir le fichier JSON contenant les utilisateurs et leurs profils
+    QFile file(m_filePath);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        qDebug() << "Erreur: Impossible d'ouvrir le fichier JSON";
+        return false; // Retourner false en cas d'erreur d'ouverture du fichier
     }
 
-    for (int i = 0; i < m_usersArray.size(); ++i) {
-        QJsonObject user = m_usersArray.at(i).toObject();
-        if (user["prenom"].toString() == prenom && user["nom"].toString() == nom) {
+    // Lire le contenu du fichier JSON
+    QByteArray jsonData = file.readAll();
+
+    // Analyser le contenu JSON
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+    if (!jsonDoc.isArray()) {
+        qDebug() << "Erreur: Format de fichier JSON invalide";
+        return false; // Retourner false en cas de format JSON invalide
+    }
+
+    // Convertir les noms et prénoms en minuscules pour ignorer les différences de casse
+    QString cleanedPrenom = prenom.simplified().toLower().trimmed();
+    QString cleanedNom = nom.simplified().toLower().trimmed();
+
+    // Parcourir le tableau JSON pour trouver l'utilisateur
+    QJsonArray jsonArray = jsonDoc.array();
+    bool userFound = false; // Indicateur pour vérifier si l'utilisateur a été trouvé
+
+    for (int i = 0; i < jsonArray.size(); ++i) {
+        QJsonObject user = jsonArray.at(i).toObject();
+        QString storedPrenom = user["prenom"].toString().simplified().toLower().trimmed();
+        QString storedNom = user["nom"].toString().simplified().toLower().trimmed();
+        qDebug() << "compares les noms :nom dans la form:"+cleanedNom +" et "+ storedNom;
+        qDebug() << "compares les prenom : " +cleanedPrenom +" et "+ storedPrenom;
+        if (storedPrenom == cleanedPrenom && storedNom == cleanedNom) {
+            // Mettre à jour les informations de l'utilisateur
+            user["prenom"] = newPrenom;
+            user["nom"] = newNom;
             user["motDepasse"] = newmotDepasse;
             user["profile"] = QJsonArray::fromStringList(newProfiles);
-            m_usersArray[i] = user;
-            return saveToFile();
+            jsonArray[i] = user;
+            userFound = true;
+            break; // Sortir de la boucle une fois que l'utilisateur est trouvé
         }
     }
 
-    qDebug() << "Utilisateur non trouvé.";
-    return false;
+    if (!userFound) {
+        qDebug() << "Utilisateur non trouvé.";
+        return false; // Retourner false si l'utilisateur n'est pas trouvé
+    }
+
+    // Réécrire le fichier JSON avec les modifications
+    jsonDoc.setArray(jsonArray); // Mettre à jour le document JSON
+    file.seek(0); // Déplacer le curseur au début du fichier
+    file.write(jsonDoc.toJson()); // Réécrire le fichier avec les modifications
+    file.resize(file.pos()); // Tronquer le fichier à la taille actuelle
+    file.close();
+
+    // Mettre à jour m_usersArray et enregistrer dans le fichier
+    m_usersArray = jsonArray;
+    return saveToFile(); // Appeler saveToFile pour enregistrer m_usersArray dans le fichier
 }
+
+
 
 QStringList JSONManager::getUserProfiles(const QString &username) const {
     QStringList profiles;

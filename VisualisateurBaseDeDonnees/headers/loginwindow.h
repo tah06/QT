@@ -16,7 +16,8 @@ public:
     QString getUsername() const;
 
 signals:
-    void loginSuccessful();
+
+    void loginSuccessful(const QString &username);
 
 private slots:
     bool loginUser();

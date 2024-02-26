@@ -41,15 +41,17 @@ static constexpr auto qt_meta_stringdata_CLASSLoginWindowENDCLASS = QtMocHelpers
     "LoginWindow",
     "loginSuccessful",
     "",
+    "username",
     "loginUser"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSLoginWindowENDCLASS_t {
-    uint offsetsAndSizes[8];
+    uint offsetsAndSizes[10];
     char stringdata0[12];
     char stringdata1[16];
     char stringdata2[1];
-    char stringdata3[10];
+    char stringdata3[9];
+    char stringdata4[10];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSLoginWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -58,11 +60,13 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSLoginWindowENDCLASS_t qt_meta_s
         QT_MOC_LITERAL(0, 11),  // "LoginWindow"
         QT_MOC_LITERAL(12, 15),  // "loginSuccessful"
         QT_MOC_LITERAL(28, 0),  // ""
-        QT_MOC_LITERAL(29, 9)   // "loginUser"
+        QT_MOC_LITERAL(29, 8),  // "username"
+        QT_MOC_LITERAL(38, 9)   // "loginUser"
     },
     "LoginWindow",
     "loginSuccessful",
     "",
+    "username",
     "loginUser"
 };
 #undef QT_MOC_LITERAL
@@ -83,13 +87,13 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLoginWindowENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x06,    1 /* Public */,
+       1,    1,   26,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   27,    2, 0x08,    2 /* Private */,
+       4,    0,   29,    2, 0x08,    3 /* Private */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    3,
 
  // slots: parameters
     QMetaType::Bool,
@@ -108,6 +112,7 @@ Q_CONSTINIT const QMetaObject LoginWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<LoginWindow, std::true_type>,
         // method 'loginSuccessful'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'loginUser'
         QtPrivate::TypeAndForceComplete<bool, std::false_type>
     >,
@@ -120,7 +125,7 @@ void LoginWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<LoginWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->loginSuccessful(); break;
+        case 0: _t->loginSuccessful((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: { bool _r = _t->loginUser();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
@@ -128,7 +133,7 @@ void LoginWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (LoginWindow::*)();
+            using _t = void (LoginWindow::*)(const QString & );
             if (_t _q_method = &LoginWindow::loginSuccessful; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -168,8 +173,9 @@ int LoginWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void LoginWindow::loginSuccessful()
+void LoginWindow::loginSuccessful(const QString & _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

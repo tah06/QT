@@ -19,7 +19,7 @@
         ]
     },
     {
-        "motDepasse": "motdepasse",
+        "motDepasse": "ahmed123",
         "nom": "Ahmed",
         "prenom": "ahmed",
         "profile": [
@@ -27,25 +27,33 @@
         ]
     },
     {
-        "motDepasse": "MOHAMED",
-        "nom": "ALI",
-        "prenom": "Ali",
+        "motDepasse": "password",
+        "nom": "EL VILALY",
+        "prenom": "elmeky",
         "profile": [
             "User"
         ]
     },
     {
-        "motDepasse": "test",
-        "nom": "TEST",
-        "prenom": "Test",
+        "motDepasse": "motdepasse",
+        "nom": "ABDEL HAMID",
+        "prenom": "Ousame",
         "profile": [
             "User"
         ]
     },
     {
-        "motDepasse": "test",
-        "nom": "test",
-        "prenom": "test",
+        "motDepasse": "password",
+        "nom": "amadou",
+        "prenom": "amadou",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "test2",
+        "prenom": "test22",
         "profile": [
             "User"
         ]
