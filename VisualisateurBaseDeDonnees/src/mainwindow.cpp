@@ -57,11 +57,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::showLoginWindow() {
     // Afficher la fenêtre de connexion
+
+
     loginWindow = new LoginWindow();
     connect(loginWindow, &LoginWindow::loginSuccessful, this, &MainWindow::showMainPage);
 
     setCentralWidget(loginWindow);
     loginWindow->show();
+
 }
 void MainWindow::setUsername(const QString &newUsername) {
     username = newUsername;
@@ -175,14 +178,23 @@ void MainWindow::clearLayout(QLayout *layout) {
 }
 
 void MainWindow::disconnectUser() {
-    // Afficher un message de déconnexion réussie
-    addUserButton->hide();
+
+
+    // Cacher le bouton de déconnexion
     disconnectButton->hide();
+
+    // Afficher un message de déconnexion réussie
     QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
+
+    addUserButton->hide();
 
     // Afficher la fenêtre de connexion
     showLoginWindow();
 }
+
+
+
+
 
 void MainWindow::showUserCreationWindow() {
     // Afficher la fenêtre de création d'utilisateur
