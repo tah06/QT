@@ -95,8 +95,7 @@ void MainWindow::showMainPage() {
         userTable->setHorizontalHeaderLabels({"Nom", "Prénom", "Modifier", "Supprimer"}); // Ajouter les en-têtes de colonne
         layout->addWidget(userTable);
 
-       refreshUserTable();
-
+        refreshUserTable();
 
         // Créer le QComboBox pour les profils
         QComboBox *profileComboBox = new QComboBox(this);
@@ -112,6 +111,13 @@ void MainWindow::showMainPage() {
             profileComboBox->setCurrentIndex(0);
             profileChanged(profiles.first());
         }
+
+        //Connecter le signal de changement de profil à la méthode refreshUserTable
+        connect(profileComboBox, QOverload<const QString &>::of(&QComboBox::currentTextChanged),
+                this, &MainWindow::refreshUserTable);
+
+
+
     }
 
     // Créer le bouton de déconnexion
@@ -135,10 +141,11 @@ void MainWindow::showMainPage() {
     // Vérifier le layout principal
     qDebug() << "Nombre d'éléments dans le layout principal : " << layout->count();
 
+
+
     // Appeler la méthode pour configurer le dropdown avec le bon nom d'utilisateur
     setupProfileDropdown();
 }
-
 
 void MainWindow::profileChanged(const QString &newProfile) {
     // Mettre à jour le profil de l'utilisateur ici
@@ -354,12 +361,8 @@ void MainWindow::handleDeleteButtonClicked(const QString &prenom, const QString 
 }
 
 void MainWindow::refreshUserTable() {
-    qDebug() << "Im hereeeeeeee";
-
-    qDebug() << "Username retrieved:" << username;
-
+    // Récupérer les profils de l'utilisateur
     QStringList profiles = jsonManager->getUserProfiles(username);
-    qDebug() << "User profiles:" << profiles;
 
     QList<QPair<QString, QString>> users = jsonManager->getAllUsers(profiles.first());
 
@@ -374,29 +377,33 @@ void MainWindow::refreshUserTable() {
         userTable->setItem(row, 0, new QTableWidgetItem(user.first)); // Nom
         userTable->setItem(row, 1, new QTableWidgetItem(user.second)); // Prénom
 
-        // Créer le bouton "Modifier" pour cette ligne
-        QPushButton *editButton = new QPushButton("Modifier", this);
-        // Connecter le bouton "Modifier" à son slot correspondant
-        connect(editButton, &QPushButton::clicked, this, [this, user](){ handleUpdateButtonClicked(user.first, user.second); });
+        // Vérifier si le profil de l'utilisateur est différent de "User" pour ajouter les boutons
+        if (profiles.first() != "User") {
+            // Créer le bouton "Modifier" pour cette ligne
+            QPushButton *editButton = new QPushButton("Modifier", this);
+            // Connecter le bouton "Modifier" à son slot correspondant
+            connect(editButton, &QPushButton::clicked, this, [this, user](){ handleUpdateButtonClicked(user.first, user.second); });
 
-        // Créer le bouton "Supprimer" pour cette ligne
-        QPushButton *deleteButton = new QPushButton("Supprimer", this);
-        // Connecter le bouton "Supprimer" à son slot correspondant
-        connect(deleteButton, &QPushButton::clicked, this, [this, user](){ handleDeleteButtonClicked(user.second, user.first); });
+            // Créer le bouton "Supprimer" pour cette ligne
+            QPushButton *deleteButton = new QPushButton("Supprimer", this);
+            // Connecter le bouton "Supprimer" à son slot correspondant
+            connect(deleteButton, &QPushButton::clicked, this, [this, user](){ handleDeleteButtonClicked(user.second, user.first); });
 
-        // Définir la taille des boutons
-        editButton->setFixedSize(100, 30);
-        deleteButton->setFixedSize(100, 30);
+            // Définir la taille des boutons
+            editButton->setFixedSize(100, 30);
+            deleteButton->setFixedSize(100, 30);
 
-        // Insérer le bouton "Modifier" dans la cellule de la colonne 2
-        userTable->setCellWidget(row, 2, editButton);
-        // Insérer le bouton "Supprimer" dans la cellule de la colonne 3
-        userTable->setCellWidget(row, 3, deleteButton);
+            // Insérer le bouton "Modifier" dans la cellule de la colonne 2
+            userTable->setCellWidget(row, 2, editButton);
+            // Insérer le bouton "Supprimer" dans la cellule de la colonne 3
+            userTable->setCellWidget(row, 3, deleteButton);
+        }
 
         // Passer à la prochaine ligne
         ++row;
     }
 }
+
 
 void MainWindow::addUserButtonClicked() {
     // Créez une boîte de dialogue pour saisir les informations de l'utilisateur
