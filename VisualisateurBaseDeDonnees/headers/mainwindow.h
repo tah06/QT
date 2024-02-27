@@ -57,7 +57,7 @@ private:
      QPushButton *editButton;
 
      void updateUserSuccess(QDialog *dialog, const QString &nom, const QString &prenom, const QString &newNom, const QString &newPrenom);
-     void refreshUserTable();
+     void refreshUserTable(const QString &profile);
 
     QDialog dialog;
 

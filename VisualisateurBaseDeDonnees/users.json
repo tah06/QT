@@ -57,5 +57,14 @@
         "profile": [
             "User"
         ]
+    },
+    {
+        "motDepasse": "motdepassse",
+        "nom": "TESTTT",
+        "prenom": "TESTTTT",
+        "profile": [
+            "User",
+            "Admin"
+        ]
     }
 ]

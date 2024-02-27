@@ -21,7 +21,7 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), loginWindow(nullptr), mainWidget(nullptr), disconnectButton(nullptr), jsonManager(nullptr), userTable(nullptr)
+    : QMainWindow(parent), loginWindow(nullptr), mainWidget(nullptr), disconnectButton(nullptr), jsonManager(nullptr), userTable(nullptr),addUserButton(nullptr)
 {
     setWindowTitle("Main Window");
 
@@ -95,7 +95,7 @@ void MainWindow::showMainPage() {
         userTable->setHorizontalHeaderLabels({"Nom", "Prénom", "Modifier", "Supprimer"}); // Ajouter les en-têtes de colonne
         layout->addWidget(userTable);
 
-        refreshUserTable();
+        refreshUserTable(nullptr);
 
         // Créer le QComboBox pour les profils
         QComboBox *profileComboBox = new QComboBox(this);
@@ -118,6 +118,14 @@ void MainWindow::showMainPage() {
 
 
 
+        // Créer le bouton "Ajouter" dans la barre de menus
+        QPushButton *addUserButton = new QPushButton("Ajouter", this);
+        menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+        connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
+
+
+
+
     }
 
     // Créer le bouton de déconnexion
@@ -133,10 +141,6 @@ void MainWindow::showMainPage() {
     setCentralWidget(mainWidget);
 
 
-    // Créer le bouton "Ajouter" dans la barre de menus
-    QPushButton *addUserButton = new QPushButton("Ajouter", this);
-    menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
-    connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
 
     // Vérifier le layout principal
     qDebug() << "Nombre d'éléments dans le layout principal : " << layout->count();
@@ -151,22 +155,7 @@ void MainWindow::profileChanged(const QString &newProfile) {
     // Mettre à jour le profil de l'utilisateur ici
     qDebug() << "Profil changé : " << newProfile;
 
-    // Charger la liste des utilisateurs en fonction du profil sélectionné
-    QList<QPair<QString, QString>> users = jsonManager->getAllUsers(newProfile);
-
-    // Effacer le contenu du tableau des utilisateurs
-    userTable->clearContents();
-    userTable->setRowCount(0);
-
-    // Remplir le tableau avec les utilisateurs
-    int row = 0;
-    for (const auto &user : users) {
-        userTable->insertRow(row);
-        userTable->setItem(row, 0, new QTableWidgetItem(user.first)); // Nom
-        userTable->setItem(row, 1, new QTableWidgetItem(user.second)); // Prénom
-        ++row;
-    }
-
+    refreshUserTable(newProfile);
     // Mettre à jour le titre de la fenêtre avec le nouveau profil
     setWindowTitle("Main Window - Profile: " + newProfile);
 }
@@ -187,6 +176,7 @@ void MainWindow::clearLayout(QLayout *layout) {
 
 void MainWindow::disconnectUser() {
     // Afficher un message de déconnexion réussie
+    addUserButton->hide();
     disconnectButton->hide();
     QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
 
@@ -352,7 +342,7 @@ void MainWindow::handleDeleteButtonClicked(const QString &prenom, const QString 
         bool success = jsonManager->removeUser(prenom, nom);
         if (success) {
 
-            refreshUserTable();
+            refreshUserTable(NULL);
         }else {
             qDebug() << "Erreur lors de la suppression de l'utilisateur";
             QMessageBox::critical(this, "Erreur", "Erreur lors de la suppression de l'utilisateur");
@@ -360,11 +350,18 @@ void MainWindow::handleDeleteButtonClicked(const QString &prenom, const QString 
     }
 }
 
-void MainWindow::refreshUserTable() {
-    // Récupérer les profils de l'utilisateur
-    QStringList profiles = jsonManager->getUserProfiles(username);
+void MainWindow::refreshUserTable(const QString &profile) {
+    // Récupérer les profils de l'utilisateur si le profil est nul
+    QStringList profiles;
+    QString p;
+    if (profile.isNull()) {
+        profiles = jsonManager->getUserProfiles(username);
+        p = profiles.first();
+    } else {
+        p = profile;
+    }
 
-    QList<QPair<QString, QString>> users = jsonManager->getAllUsers(profiles.first());
+    QList<QPair<QString, QString>> users = jsonManager->getAllUsers(p);
 
     // Effacer le contenu du tableau des utilisateurs
     userTable->clearContents();
@@ -378,7 +375,7 @@ void MainWindow::refreshUserTable() {
         userTable->setItem(row, 1, new QTableWidgetItem(user.second)); // Prénom
 
         // Vérifier si le profil de l'utilisateur est différent de "User" pour ajouter les boutons
-        if (profiles.first() != "User") {
+        if (p != "User") {
             // Créer le bouton "Modifier" pour cette ligne
             QPushButton *editButton = new QPushButton("Modifier", this);
             // Connecter le bouton "Modifier" à son slot correspondant
@@ -403,6 +400,7 @@ void MainWindow::refreshUserTable() {
         ++row;
     }
 }
+
 
 
 void MainWindow::addUserButtonClicked() {
@@ -452,7 +450,7 @@ void MainWindow::addUserButtonClicked() {
         bool success = jsonManager->addUser(prenom, nom, motDePasse, profiles);
         if (success) {
             qDebug() << "Utilisateur ajouté avec succès";
-            refreshUserTable(); // Rafraîchissez le tableau des utilisateurs après l'ajout
+            refreshUserTable(NULL); // Rafraîchissez le tableau des utilisateurs après l'ajout
         } else {
             qDebug() << "Erreur lors de l'ajout de l'utilisateur";
             QMessageBox::critical(this, "Erreur", "Erreur lors de l'ajout de l'utilisateur");
