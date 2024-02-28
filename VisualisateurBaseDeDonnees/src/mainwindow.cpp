@@ -126,10 +126,10 @@ void MainWindow::showMainPage() {
 
 
         if (isLoggedIn) {
-        // Créer le bouton "Ajouter" dans la barre de menus
-        QPushButton *addUserButton = new QPushButton("Ajouter", this);
-        menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
-        connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
+            // Créer le bouton "Ajouter" dans la barre de menus
+            QPushButton *addUserButton = new QPushButton("Ajouter", this);
+            menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+            connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
 
 
         }
@@ -380,6 +380,19 @@ void MainWindow::refreshUserTable(const QString &profile) {
         p = profiles.first();
     } else {
         p = profile;
+    }
+
+    if (p=="User"){
+        isLoggedIn = false;
+        menuBar()->setCornerWidget(nullptr, Qt::TopRightCorner);
+
+
+
+    }else{
+        menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+        menuBar()->setCornerWidget(disconnectButton, Qt::TopRightCorner);
+
+
     }
 
     QList<QPair<QString, QString>> users = jsonManager->getAllUsers(p);
