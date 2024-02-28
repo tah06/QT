@@ -51,20 +51,11 @@
         ]
     },
     {
-        "motDepasse": "motdepasse",
-        "nom": "test2",
-        "prenom": "test22",
+        "motDepasse": "kjhghghj",
+        "nom": "test22",
+        "prenom": "test",
         "profile": [
             "User"
-        ]
-    },
-    {
-        "motDepasse": "motdepassse",
-        "nom": "TESTTT",
-        "prenom": "TESTTTT",
-        "profile": [
-            "User",
-            "Admin"
         ]
     }
 ]

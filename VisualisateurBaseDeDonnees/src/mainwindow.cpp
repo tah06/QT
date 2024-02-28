@@ -21,7 +21,7 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), loginWindow(nullptr), mainWidget(nullptr), disconnectButton(nullptr), jsonManager(nullptr), userTable(nullptr),addUserButton(nullptr)
+    : QMainWindow(parent), loginWindow(nullptr), mainWidget(nullptr), disconnectButton(nullptr), jsonManager(nullptr), userTable(nullptr),addUserButton(nullptr),isLoggedIn(false)
 {
     setWindowTitle("Main Window");
 
@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
         showUserCreationWindow();
     } else {
         // Afficher la fenêtre de connexion
+
         showLoginWindow();
 
     }
@@ -63,7 +64,10 @@ void MainWindow::showLoginWindow() {
     connect(loginWindow, &LoginWindow::loginSuccessful, this, &MainWindow::showMainPage);
 
     setCentralWidget(loginWindow);
+
     loginWindow->show();
+
+
 
 }
 void MainWindow::setUsername(const QString &newUsername) {
@@ -72,6 +76,7 @@ void MainWindow::setUsername(const QString &newUsername) {
 
 void MainWindow::showMainPage() {
     qDebug() << "Connexion réussie, affichage de la page principale...";
+    isLoggedIn = true;
 
     // Récupérer l'utilisateur actuellement connecté
     username = loginWindow->getUsername(); // Assurez-vous que username est un membre de la classe MainWindow
@@ -120,13 +125,14 @@ void MainWindow::showMainPage() {
                 this, &MainWindow::refreshUserTable);
 
 
-
+        if (isLoggedIn) {
         // Créer le bouton "Ajouter" dans la barre de menus
         QPushButton *addUserButton = new QPushButton("Ajouter", this);
         menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
         connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
 
 
+        }
 
 
     }
@@ -179,17 +185,19 @@ void MainWindow::clearLayout(QLayout *layout) {
 
 void MainWindow::disconnectUser() {
 
-
+    isLoggedIn = false;
+    menuBar()->setCornerWidget(nullptr, Qt::TopRightCorner);
     // Cacher le bouton de déconnexion
     disconnectButton->hide();
 
     // Afficher un message de déconnexion réussie
     QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
 
-    addUserButton->hide();
+
 
     // Afficher la fenêtre de connexion
     showLoginWindow();
+
 }
 
 
@@ -205,6 +213,7 @@ void MainWindow::showUserCreationWindow() {
         QSettings settings("MonEntreprise", "MonApplication");
         settings.setValue("firstRun", false);
         // Afficher la fenêtre de connexion
+
         showLoginWindow();
     } else {
         qDebug() << "Création d'utilisateur annulée";

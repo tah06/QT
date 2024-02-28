@@ -63,6 +63,7 @@ private:
 
     void setUsername(const QString &newUsername);
     QPushButton *addUserButton;
+    bool isLoggedIn;
 
 
 
