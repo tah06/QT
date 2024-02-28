@@ -51,14 +51,6 @@
         ]
     },
     {
-        "motDepasse": "kjhghghj",
-        "nom": "test22",
-        "prenom": "test",
-        "profile": [
-            "User"
-        ]
-    },
-    {
         "motDepasse": "motdepasse",
         "nom": "TEST5",
         "prenom": "test5",
@@ -72,6 +64,38 @@
         "prenom": "prenomUser",
         "profile": [
             "Admin",
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "UserNom",
+        "prenom": "UserPreno",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "TESTTEST",
+        "prenom": "testtest",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "test",
+        "nom": "fdfdijfd",
+        "prenom": "mfjdkf",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "FDKFJDF",
+        "prenom": "DJFDJDJFD",
+        "profile": [
             "User"
         ]
     }

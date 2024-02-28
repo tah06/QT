@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     } else {
         // Afficher la fenêtre de connexion
         settings.setValue("firstRun", false);
-        settings.setValue("firstRun", true);
+
 
         showLoginWindow();
 
@@ -80,6 +80,8 @@ void MainWindow::setUsername(const QString &newUsername) {
 void MainWindow::showMainPage() {
     qDebug() << "Connexion réussie, affichage de la page principale...";
     isLoggedIn = true;
+    menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+
 
     // Récupérer l'utilisateur actuellement connecté
     username = loginWindow->getUsername(); // Assurez-vous que username est un membre de la classe MainWindow
