@@ -2,7 +2,7 @@
     {
         "motDepasse": "Mohamed",
         "nom": "SID BRAHIM",
-        "prenom": "SID BRAHIM",
+        "prenom": "Mohamed",
         "profile": [
             "SuperUser",
             "Admin",
@@ -84,17 +84,41 @@
         ]
     },
     {
-        "motDepasse": "test",
-        "nom": "fdfdijfd",
-        "prenom": "mfjdkf",
+        "motDepasse": "motdepasse",
+        "nom": "FDKFJDF",
+        "prenom": "DJFDJDJFD",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "mohamed",
+        "nom": "MEDMED",
+        "prenom": "medmed",
         "profile": [
             "User"
         ]
     },
     {
         "motDepasse": "motdepasse",
-        "nom": "FDKFJDF",
-        "prenom": "DJFDJDJFD",
+        "nom": "TEST6",
+        "prenom": "test6",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "BAA",
+        "prenom": "DJFJDJF",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "TEST7",
+        "prenom": "test7",
         "profile": [
             "User"
         ]

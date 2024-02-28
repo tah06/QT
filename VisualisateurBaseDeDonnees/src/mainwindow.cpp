@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
         settings.setValue("firstRun", false);
 
 
+
         showLoginWindow();
 
     }
@@ -80,7 +81,7 @@ void MainWindow::setUsername(const QString &newUsername) {
 void MainWindow::showMainPage() {
     qDebug() << "Connexion réussie, affichage de la page principale...";
     isLoggedIn = true;
-    menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+    menuBar()->setCornerWidget(addUserButton, Qt::TopLeftCorner);
 
 
     // Récupérer l'utilisateur actuellement connecté
@@ -133,7 +134,7 @@ void MainWindow::showMainPage() {
         if (isLoggedIn) {
             // Créer le bouton "Ajouter" dans la barre de menus
             QPushButton *addUserButton = new QPushButton("Ajouter", this);
-            menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+            menuBar()->setCornerWidget(addUserButton, Qt::TopLeftCorner);
             connect(addUserButton, &QPushButton::clicked, this, &MainWindow::addUserButtonClicked);
 
 
@@ -198,7 +199,7 @@ void MainWindow::disconnectUser() {
     QMessageBox::information(this, "Déconnexion", "Vous êtes déconnecté.");
 
 
-
+    delete loginWindow;
     // Afficher la fenêtre de connexion
     showLoginWindow();
 
@@ -383,12 +384,12 @@ void MainWindow::refreshUserTable(const QString &profile) {
 
     if (p=="User"){
         isLoggedIn = false;
-        menuBar()->setCornerWidget(nullptr, Qt::TopRightCorner);
+        menuBar()->setCornerWidget(nullptr, Qt::TopLeftCorner);
 
 
 
     }else{
-        menuBar()->setCornerWidget(addUserButton, Qt::TopRightCorner);
+        menuBar()->setCornerWidget(addUserButton, Qt::TopLeftCorner);
         menuBar()->setCornerWidget(disconnectButton, Qt::TopRightCorner);
 
 
@@ -499,5 +500,4 @@ void MainWindow::addUserButtonClicked() {
     // Affichez le QDialog modale
     dialog.exec();
 }
-
 

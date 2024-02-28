@@ -216,15 +216,22 @@ QList<QPair<QString, QString>> JSONManager::getAllUsers(const QString &profile) 
         QJsonObject userObject = value.toObject();
         QJsonArray userProfiles = userObject.value("profile").toArray();
 
-        // Afficher les profils de l'utilisateur pour débogage
-        qDebug() << "Profils de l'utilisateur:" << userProfiles;
-
-        // Vérifier si l'utilisateur a le profil requis
-        if (profile == "SuperUser" || (profile == "Admin" && userProfiles.contains("Admin"))) {
+        // Vérifier si le profil est SuperUser
+        if (profile == "SuperUser") {
             QString nom = userObject.value("nom").toString();
             QString prenom = userObject.value("prenom").toString();
             users.append(qMakePair(nom, prenom));
         }
+        // Vérifier si le profil est Admin
+        else if (profile == "Admin") {
+            // Vérifier si l'utilisateur n'a pas le profil SuperUser
+            if (!userProfiles.contains("SuperUser")) {
+                QString nom = userObject.value("nom").toString();
+                QString prenom = userObject.value("prenom").toString();
+                users.append(qMakePair(nom, prenom));
+            }
+        }
+        // Sinon, ne rien faire pour d'autres profils
     }
 
     // Afficher les utilisateurs récupérés pour débogage
