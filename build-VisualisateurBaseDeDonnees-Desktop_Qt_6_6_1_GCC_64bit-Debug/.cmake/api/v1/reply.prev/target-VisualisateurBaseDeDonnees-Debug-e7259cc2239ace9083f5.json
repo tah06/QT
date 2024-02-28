@@ -70,13 +70,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 76,
+				"line" : 77,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 61,
+				"line" : 62,
 				"parent" : 0
 			},
 			{
@@ -289,7 +289,8 @@
 				2,
 				7,
 				8,
-				10
+				10,
+				11
 			]
 		}
 	],
@@ -380,7 +381,8 @@
 				2,
 				7,
 				8,
-				10
+				10,
+				11
 			]
 		},
 		{
@@ -391,7 +393,6 @@
 				5,
 				6,
 				9,
-				11,
 				12
 			]
 		},
@@ -477,8 +478,9 @@
 		},
 		{
 			"backtrace" : 4,
-			"path" : "headers/profiledropdown.h",
-			"sourceGroupIndex" : 1
+			"compileGroupIndex" : 0,
+			"path" : "src/profiledropdown.cpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,

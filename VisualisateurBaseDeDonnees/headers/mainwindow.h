@@ -11,9 +11,9 @@
 #include <QLabel>
 #include "loginwindow.h"
 #include "usercreationwindow.h"
-#include "profiledropdown.h"
-#include <QTableWidget>
 
+#include <QTableWidget>
+#include <QComboBox>
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -45,7 +45,7 @@ private:
     QTableWidget *userTable;
     LoginWindow *loginWindow;
     QPushButton *disconnectButton;
-    ProfileDropdown *profileDropdown;
+
     QWidget *mainWidget;
     JSONManager *jsonManager;
     QLabel *titleLabel;

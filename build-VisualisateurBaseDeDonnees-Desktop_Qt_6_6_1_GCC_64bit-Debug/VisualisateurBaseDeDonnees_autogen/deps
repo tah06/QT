@@ -3,13 +3,11 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/jsonmanager.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/loginwindow.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/mainwindow.h \
-	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/profiledropdown.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/headers/usercreationwindow.h \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/jsonmanager.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/loginwindow.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/main.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/mainwindow.cpp \
-	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/profiledropdown.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/VisualisateurBaseDeDonnees/src/usercreationwindow.cpp \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/build-VisualisateurBaseDeDonnees-Desktop_Qt_6_6_1_GCC_64bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	/home/mohamed/Archive_polyTech/S8/PlatformeC++/QT/build-VisualisateurBaseDeDonnees-Desktop_Qt_6_6_1_GCC_64bit-Debug/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake \
@@ -194,7 +192,6 @@ VisualisateurBaseDeDonnees_autogen/timestamp: \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QPushButton \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QTableWidget \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QVBoxLayout \
-	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/QWidget \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
 	/home/mohamed/Qt/6.6.1/gcc_64/include/QtWidgets/qabstractitemview.h \

@@ -57,5 +57,22 @@
         "profile": [
             "User"
         ]
+    },
+    {
+        "motDepasse": "motdepasse",
+        "nom": "TEST5",
+        "prenom": "test5",
+        "profile": [
+            "User"
+        ]
+    },
+    {
+        "motDepasse": "password",
+        "nom": "Nomuser",
+        "prenom": "prenomUser",
+        "profile": [
+            "Admin",
+            "User"
+        ]
     }
 ]

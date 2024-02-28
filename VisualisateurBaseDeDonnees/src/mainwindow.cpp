@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     } else {
         // Afficher la fenêtre de connexion
         settings.setValue("firstRun", false);
+        settings.setValue("firstRun", true);
 
         showLoginWindow();
 
@@ -158,8 +159,7 @@ void MainWindow::showMainPage() {
 
 
 
-    // Appeler la méthode pour configurer le dropdown avec le bon nom d'utilisateur
-    setupProfileDropdown();
+
 }
 
 void MainWindow::profileChanged(const QString &newProfile) {
@@ -224,12 +224,7 @@ void MainWindow::showUserCreationWindow() {
     }
 }
 
-void MainWindow::setupProfileDropdown() {
-    profileDropdown = new ProfileDropdown(this);
-    QStringList profiles = jsonManager->getUserProfiles(username); // Assurez-vous d'avoir un moyen d'accéder au nom de l'utilisateur courant
-    profileDropdown->setProfiles(profiles);
-    connect(profileDropdown, &ProfileDropdown::profileChanged, this, &MainWindow::handleProfileDropdownChange);
-}
+
 
 void MainWindow::handleProfileDropdownChange(const QString &newProfile) {
     // Mettez ici le code pour gérer le changement de profil
