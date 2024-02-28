@@ -32,14 +32,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Vérifier si c'est la première fois que l'utilisateur ouvre l'application
     QSettings settings("MonEntreprise", "MonApplication");
+
     bool isFirstRun = settings.value("firstRun", true).toBool();
-    settings.setValue("firstRun", false);
+
     if (isFirstRun) {
         // Afficher la fenêtre de création d'utilisateur
         settings.setValue("firstRun", false);
         showUserCreationWindow();
     } else {
         // Afficher la fenêtre de connexion
+        settings.setValue("firstRun", false);
 
         showLoginWindow();
 
